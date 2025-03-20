@@ -11,16 +11,16 @@ public class MyLibrary {
 
 
     public MyLibrary(String name) {
-        this.name = name;
-        this.books = new ArrayList<Book>();
-        this.persons = new ArrayList<Person> ();
+        setName(name);
+        setBooks(books);
+        setPersons(persons);
     }
 
 
     public String getName() {
         return name;
     }
-    public void setName(String name) throws RuntimeException{#
+    public void setName(String name) throws RuntimeException{
         if (name == null) {
             throw new RuntimeException("Le nom de la bibliothèque ne peut être nul");
             
@@ -35,12 +35,20 @@ public class MyLibrary {
         return books;
     }
     public void setBooks(ArrayList<Book> books) throws RuntimeException{
+        if (books.size() < 1) {
+            throw new RuntimeException("La bibliothèque doit contenir au moins un livre !");
+            
+        }
         this.books = books;
     }
     public ArrayList<Person> getPersons() {
         return persons;
     }
-    public void setPersons(ArrayList<Person> persons) {
+    public void setPersons(ArrayList<Person> persons) throws RuntimeException {
+        if (persons.size() < 1) {
+            throw new RuntimeException("La bibliothèque doit avoir au moins un adhérent !");
+            
+        }
         this.persons = persons;
     }
     public static byte getBookLimit() {

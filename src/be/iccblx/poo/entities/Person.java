@@ -36,11 +36,11 @@ public class Person {
 
     public void setName(String name) throws RuntimeException {
         if (name == null) {
-            throw new RuntimeException("Le nom de l'emprunteur ne peut être null");    
+            throw new RuntimeException("Le nom du membre ne peut être null");    
         }
 
         if (name.trim() == "") {
-            throw new RuntimeException("Le nom de l'emprunteur ne peut être vide");    
+            throw new RuntimeException("Le nom du membre ne peut être vide");    
         }
         this.name = name.trim();
     }
