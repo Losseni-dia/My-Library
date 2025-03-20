@@ -32,7 +32,7 @@ public class Book  {
         this.rentalPrice = rentalPrice;
         this.language = language;
         this.nbCopies = nbCopies;
-        this.borrowable = true;
+        setBorrowable(borrowable);
     }
 
 
@@ -131,7 +131,11 @@ public class Book  {
     }
 
 
-    public void setBorrowable(boolean borrowable) {
+    public void setBorrowable(boolean borrowable) throws RuntimeException {
+        if (!borrowable) {
+            throw new RuntimeException("Ce livre est momentanement indisponible.");
+            
+        }
         this.borrowable = borrowable;
     }
 

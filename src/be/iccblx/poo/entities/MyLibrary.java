@@ -20,13 +20,21 @@ public class MyLibrary {
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws RuntimeException{#
+        if (name == null) {
+            throw new RuntimeException("Le nom de la bibliothèque ne peut être nul");
+            
+        }
+        if (name.trim() == " ") {
+            throw new RuntimeException("Le nom de la bibliothèque ne peut être vide");
+            
+        }
+        this.name = name.trim();
     }
     public ArrayList<Book> getBooks() {
         return books;
     }
-    public void setBooks(ArrayList<Book> books) {
+    public void setBooks(ArrayList<Book> books) throws RuntimeException{
         this.books = books;
     }
     public ArrayList<Person> getPersons() {
@@ -46,11 +54,19 @@ public class MyLibrary {
     }
 
 
-    public void addBook(Book b){
+    public void addBook(Book b) throws RuntimeException{
+        if (books.contains(b)) {
+            throw new RuntimeException("Ce livre est déjà enregistré dans la bibliothèque !");
+            
+        }
         this.books.add(b);
     }
 
-    public void addMember(Person p){
+    public void addMember(Person p) throws RuntimeException{
+        if (persons.contains(p)) {
+            throw new RuntimeException("Cette personne est déjà inscrite dans la bibliothèque");
+            
+        }
         this.persons.add(p);
     }
 
