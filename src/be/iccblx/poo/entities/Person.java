@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.UUID;
 
+import javax.management.RuntimeErrorException;
+
 public class Person {
 
     protected UUID id;
@@ -13,9 +15,9 @@ public class Person {
     private LocalDate registrationDate;
     private Map<LocalDate, ArrayList<Book>> books;
 
-    public Person(String name) {
-        this.id = UUID.randomUUID();
-        this.name = name;
+    public Person(UUID id,String name) {
+        this.id = id;
+        setName(name);
         this.registrationDate = LocalDate.now();
         this.books = new HashMap<LocalDate, ArrayList<Book>>();
     }
@@ -32,8 +34,15 @@ public class Person {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws RuntimeException {
+        if (name == null) {
+            throw new RuntimeException("Le nom de l'emprunteur ne peut être null");    
+        }
+
+        if (name.trim() == "") {
+            throw new RuntimeException("Le nom de l'emprunteur ne peut être vide");    
+        }
+        this.name = name.trim();
     }
 
     public LocalDate getRegistrationDate() {
@@ -63,6 +72,12 @@ public class Person {
 
         // TODO
      return 0;
+    }
+
+    public void getLateBooks(){
+        books.forEach((date, bookList) -> {
+            
+        });
     }
 
 
