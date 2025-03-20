@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.UUID;
 
-import javax.management.RuntimeErrorException;
-
 public class Person {
 
     protected UUID id;

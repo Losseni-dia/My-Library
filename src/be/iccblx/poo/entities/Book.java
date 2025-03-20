@@ -1,9 +1,6 @@
 package be.iccblx.poo.entities;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.UUID;
 
 public class Book  {
@@ -13,22 +10,22 @@ public class Book  {
     private String author;
     private int totalPage;
     private int loanPeriod;
-    private Map<LocalDate, ArrayList<Person>> borrowers;
+    private ArrayList<Person> borrowers;
     private double rentalPrice;
     private Language language;
     private int nbCopies;
     private boolean borrowable;
 
 
-    public Book(UUID id, String title, String author, int totalPage,
+    public Book(UUID id, String title, String author, int totalPage, int loanPeriod,
              double rentalPrice, Language language, int nbCopies,
             boolean borrowable) {
         this.id = id;
-        this.title = title;
-        this.author = author;
+        setTitle(title);
+        setAuthor(author);
         this.totalPage = totalPage;
-        this.loanPeriod = 0;
-        this.borrowers = new HashMap<LocalDate, ArrayList<Person>>();
+        this.loanPeriod = loanPeriod;
+        this.borrowers = new ArrayList<Person>();
         this.rentalPrice = rentalPrice;
         this.language = language;
         this.nbCopies = nbCopies;
@@ -51,8 +48,16 @@ public class Book  {
     }
 
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String title) throws RuntimeException {
+        if (title == null) {
+            throw new RuntimeException("Le titre du livre ne peut être null");
+            
+        }
+        if (title.trim() == "") {
+            throw new RuntimeException("Le titre du livre ne peut être vide");
+            
+        }
+        this.title = title.trim();
     }
 
 
@@ -61,8 +66,16 @@ public class Book  {
     }
 
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthor(String author) throws RuntimeException{
+        if (author == null) {
+            throw new RuntimeException("Le nom de l'auteur de ne peut être null");
+            
+        }
+        if (author.trim() == "") {
+            throw new RuntimeException("Le nom de l'auteur de ne peut être vide");
+            
+        }
+        this.author = author.trim();
     }
 
 
@@ -86,12 +99,12 @@ public class Book  {
     }
 
 
-    public Map<LocalDate, ArrayList<Person>> getBorrowers() {
+    public ArrayList<Person> getBorrowers() {
         return borrowers;
     }
 
 
-    public void setBorrowers(Map<LocalDate, ArrayList<Person>> borrowers) {
+    public void setBorrowers(ArrayList<Person> borrowers) {
         this.borrowers = borrowers;
     }
 
@@ -142,8 +155,14 @@ public class Book  {
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", totalPage=" + totalPage
-                + ", loanPeriod=" + loanPeriod + ", borrowers=" + borrowers + ", rentalPrice=" + rentalPrice
+
+        StringBuilder liste = new StringBuilder();
+        borrowers.forEach(p -> {
+            liste.append(p.getName()).append("\n");
+        });
+        
+        return "Book [ title=" + title + ", author=" + author + ", totalPage=" + totalPage
+                + ", loanPeriod=" + loanPeriod + " jours, borrowers=" + liste+ ", rentalPrice=" + Math.round(rentalPrice)
                 + ", language=" + language + ", nbCopies=" + nbCopies + ", borrowable=" + borrowable + "]";
     }
 

@@ -7,9 +7,9 @@ public class GraphicNovel extends Book{
     private Person cartoonist;
     private String color;
 
-    public GraphicNovel(UUID id, String title, String author, int totalPage, double rentalPrice, Language language,
+    public GraphicNovel(UUID id, String title, String author, int totalPage, int loanPeriod, double rentalPrice, Language language,
             int nbCopies, boolean borrowable, Person cartoonist, String color) {
-        super(id, title, author, totalPage, rentalPrice, language, nbCopies, borrowable);
+        super(id, title, author, totalPage,loanPeriod, rentalPrice, language, nbCopies, borrowable);
         this.cartoonist = cartoonist;
         this.color = color;
     }
