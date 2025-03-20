@@ -58,6 +58,8 @@ public class MyLibrary {
 
     @Override
     public String toString() {
+        String liste = "";
+        
         return this.getName() + name + ": "+ books.size() +" books," + persons.size() +"  members";
     }
 

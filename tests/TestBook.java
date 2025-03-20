@@ -33,8 +33,6 @@ public class TestBook {
         assertEquals(0, lre.getBorrowers().size());
         assertNotNull(lre.getBorrowers());
 
-
-
     }
 
     @Test
